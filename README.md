@@ -11,9 +11,18 @@ A minimalist Apex/Aura project to perform loookus on the Business Registry of th
 - A Custom Metadata Type to set up your Authentication GUID
 - A Remote Site Setting to authorize access to the abr.business.gov.au site
 
+## Deploy package
+
+You can of course clone this repo and deploy using `sfdx` or Visual Studio.
+Alternatively, deploy from here:
+
+<a href="https://githubsfdeploy.herokuapp.com?owner=eschweitzer78&amp;repo=AbrBusinessGovAuLookup">
+  <img src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png" alt="Deploy to Salesforce" />
+</a>
+
 ## Configure Your Authentication GUID
 
-Check the details, including usage terms, on the [Business Registry website](https://abr.business.gov.au/Tools/WebServices), accept thee web services agreement and get your GUID, which will be sent to you by email.
+Check the details, including usage terms, on the [Business Registry website](https://abr.business.gov.au/Tools/WebServices), accept the web services agreement and get your GUID, which will be sent to you by email.
 
 Once received, in the Salesforce setup, manage records for the "AbrBusinessGovAu Setting" custom metadate type (Setup > Custom Code > Custom Metadata Types).
 
