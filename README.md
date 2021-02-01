@@ -16,7 +16,7 @@ A minimalist Apex/Aura project to perform loookus on the Business Registry of th
 You can of course clone this repo and deploy using `sfdx` or Visual Studio.
 Alternatively, deploy from here:
 
-<a href="https://githubsfdeploy.herokuapp.com?owner=eschweitzer78&amp;repo=AbrBusinessGovAuLookup">
+<a href="https://githubsfdeploy.herokuapp.com?owner=eschweitzer78&repo=AbrBusinessGovAuLookup&ref=main">
   <img src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png" alt="Deploy to Salesforce" />
 </a>
 
@@ -27,6 +27,10 @@ Check the details, including usage terms, on the [Business Registry website](htt
 Once received, in the Salesforce setup, manage records for the "AbrBusinessGovAu Setting" custom metadate type (Setup > Custom Code > Custom Metadata Types).
 
 On the management screen, create a new record. Make sure your select the *Authentication GUID* type, and enter your GUID as the value. The GUID has a format like `1234567898-abcd-1234-abcd-123456789ab`. 
+
+## Activate the ABR Lookup page
+
+In Setup, navigate to the Lightning App Builder and locate the `ABR_Lookup` app page. Edit it in order to activate it.
 
 ## Test It
 
