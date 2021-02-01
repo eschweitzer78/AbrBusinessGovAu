@@ -1,18 +1,31 @@
-# Salesforce DX Project: Next Steps
+# AbrBusinessGovAuLookup
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+A minimalist Apex/Aura project to perform loookus on the Business Registry of the Australian Government. Bring your own Authentication GUID.
 
-## How Do You Plan to Deploy Your Changes?
+## What is included?
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- A set of APEX classes to perform the lookup
+- An APEX test class
+- A set of Aura widgets to graphically trigger a lookup
+- A Lighning App page with the Aura widgets
+- A Custom Metadata Type to set up your Authentication GUID
+- A Remote Site Setting to authorize access to the abr.business.gov.au site
 
-## Configure Your Salesforce DX Project
+## Configure Your Authentication GUID
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+Check the details, including usage terms, on the [Business Registry website](https://abr.business.gov.au/Tools/WebServices), accept thee web services agreement and get your GUID, which will be sent to you by email.
 
-## Read All About It
+Once received, in the Salesforce setup, manage records for the "AbrBusinessGovAu Setting" custom metadate type (Setup > Custom Code > Custom Metadata Types).
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+On the management screen, create a new record. Make sure your select the *Authentication GUID* type, and enter your GUID as the value. The GUID has a format like `1234567898-abcd-1234-abcd-123456789ab`. 
+
+## Test It
+
+Use the application waffle in the upper right corner of the screen to navigate to the `ABR Lookup` application. Enter either an ABN or a partial company name, and hit the `Lookup` button.
+
+## What's next
+
+Our future plans include:
+- Extending the APEX class for more operations and more filters,
+- Enabling for use from a Flow
+- Rewriting the Aura widgets in LWC
