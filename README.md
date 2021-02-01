@@ -24,7 +24,7 @@ Alternatively, deploy from here:
 
 Check the details, including usage terms, on the [Business Registry website](https://abr.business.gov.au/Tools/WebServices), accept the web services agreement and get your GUID, which will be sent to you by email.
 
-Once received, in the Salesforce setup, manage records for the "AbrBusinessGovAu Setting" custom metadate type (Setup > Custom Code > Custom Metadata Types).
+Once received, in the Salesforce setup, manage records for the `AbrBusinessGovAu Setting` custom metadate type (Setup > Custom Code > Custom Metadata Types).
 
 On the management screen, create a new record. Make sure your select the *Authentication GUID* type, and enter your GUID as the value. The GUID has a format like `1234567898-abcd-1234-abcd-123456789ab`. 
 
