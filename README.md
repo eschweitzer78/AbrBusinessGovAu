@@ -1,6 +1,6 @@
 # AbrBusinessGovAuLookup
 
-A minimalist Apex/Aura project to perform loookus on the Business Registry of the Australian Government. Bring your own Authentication GUID.
+A minimalist Apex/Aura project to perform lookups to the Business Registry of the Australian Government. Bring your own Authentication GUID.
 
 ## What is included?
 
