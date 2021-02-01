@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>AbrBusinessGovAuCallout</members>
+        <members>AbrBusinessGovAuMock_ABNResponse_OK</members>
+        <members>AbrBusinessGovAuMock_ABNResponse_KO</members>
+        <members>AbrBusinessGovAuMock_NameResponse_OK</members>
+        <members>AbrBusinessGovAuTest</members>
+        <members>AbrBusinessGovAuAbrXMLSearch</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>AbrBusinessGovAu_Setting__mdt.Setting_Type__c</members>
+        <members>AbrBusinessGovAu_Setting__mdt.Setting_Value__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>FormattedABNNumber</members>
+        <members>AbrBusinessGovAuLookupEntry</members>
+        <members>AbrBusinessGovAuLookup</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>ABR_Lookup</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Australian_Business_Registry_XML_Search</members>
+        <name>RemoteSiteSetting</name>
+    </types>
+     <version>50.0</version>
+</Package>

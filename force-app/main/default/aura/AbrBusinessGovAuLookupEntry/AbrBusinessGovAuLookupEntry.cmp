@@ -1,0 +1,112 @@
+<aura:component>
+    <aura:attribute name="lookupEntry" type="Object" access="public" />
+
+	<lightning:card title="{! !empty(v.lookupEntry.mainName) ?
+                              v.lookupEntry.mainName.organisationName :
+                                !empty(v.lookupEntry.legalName) ?
+                                v.lookupEntry.legalName.givenName + ' ' + v.lookupEntry.legalName.familyName :
+                                '&#x2042; Suppressed Name &#x2042;' }"
+                    iconName="standard:account">
+        <div class="slds-m-around_medium">
+            <aura:if isTrue="{! !empty(v.lookupEntry.mainName) || 
+                                !empty(v.lookupEntry.legalName) }">
+            <p>Entity name:&nbsp;{! !empty(v.lookupEntry.mainName.organisationName) ?
+                                    v.lookupEntry.mainName.organisationName :
+                                    v.lookupEntry.legalName.givenName + ' ' + v.lookupEntry.legalName.familyName }</p>
+            
+            </aura:if>
+            <p>ABN:&nbsp;
+                <aura:iteration items="{! v.lookupEntry.ABN }" var="item" indexVar="i">
+                    <aura:if isTrue="{! empty(item.replacedIdentifierValue) }">
+                        <c:FormattedABNNumber ABN="{! item.identifierValue }" />
+                        <aura:set attribute="else">
+                            <c:FormattedABNNumber ABN="{! item.replacedIdentifierValue }" />
+                        </aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{! item.isCurrentIndicator eq 'N' }">&ensp;(Not current)</aura:if>
+                    <aura:if isTrue="{! !empty(item.identifierStatus) }">&ensp;({! item.identifierStatus })</aura:if>
+                    <aura:if isTrue="{! !empty(item.replacedIdentifierValue) }">&ensp;(Replaced)</aura:if>
+                    <aura:if isTrue="{! i lt (v.lookupEntry.ABN.length - 1) }">,&ensp;</aura:if>
+                </aura:iteration>
+            </p>
+            
+          	<aura:if isTrue="{! !empty(v.lookupEntry.entityStatus) }">
+                <p>Status:&nbsp;
+                    <aura:iteration items="{! v.lookupEntry.entityStatus }" var="item">
+                        {! item.entityStatusCode }
+                        <aura:if isTrue="{! !empty(item.effectiveFrom) &amp;&amp; item.effectiveFrom ne '0000-12-30' }">
+                            from <lightning:formattedDateTime value="{! item.effectiveFrom }"/>
+                        </aura:if>
+                        <aura:if isTrue="{! !empty(item.effectiveTo) &amp;&amp; item.effectiveTo ne '0000-12-30' }">
+                            to <lightning:formattedDateTime value="{! item.effectiveTo }"/>
+                        </aura:if>
+                    </aura:iteration> 
+                </p>
+            </aura:if>
+            
+          	<aura:if isTrue="{! !empty(v.lookupEntry.entityType) &amp;&amp;
+                                !empty(v.lookupEntry.entityType.entityDescription) }">
+            	<p>Entity type:&nbsp;{! v.lookupEntry.entityType.entityDescription }</p>
+            </aura:if>
+            
+            <aura:if isTrue="{! !empty(v.lookupEntry.goodsAndServicesTax) }">
+                <p>GST: Registered
+                    <aura:iteration items="{! v.lookupEntry.goodsAndServicesTax }"
+                                    var="item">
+                        <aura:if isTrue="{! !empty(item.effectiveFrom) &amp;&amp; item.effectiveFrom ne '0000-12-30' }">
+                            from <lightning:formattedDateTime value="{! item.effectiveFrom }"/>
+                        </aura:if>
+                        <aura:if isTrue="{! !empty(item.effectiveTo) &amp;&amp; item.effectiveTo ne '0000-12-30' }">
+                            to <lightning:formattedDateTime value="{! item.effectiveTo }"/>
+                        </aura:if>
+                    </aura:iteration>
+                    <aura:set attribute="else">
+                        Not currently registered
+                    </aura:set>
+                </p>
+            </aura:if>
+            
+            <aura:if isTrue="{! !empty(v.lookupEntry.mainBusinessPhysicalAddress) }">
+                <p>Main business location:&nbsp;
+                    <aura:iteration items="{! v.lookupEntry.mainBusinessPhysicalAddress }"
+                                    var="item">
+                        {! item.stateCode }&nbsp;{! item.postcode }
+                        <aura:if isTrue="{! empty(item.isCurrentIndicator) }">
+                            <aura:if isTrue="{! !empty(item.effectiveFrom) &amp;&amp; item.effectiveFrom ne '0000-12-30' }">
+                                from <lightning:formattedDateTime value="{! item.effectiveFrom }"/>
+                            </aura:if>
+                            <aura:if isTrue="{! !empty(item.effectiveTo) &amp;&amp; item.effectiveTo ne '0000-12-30' }">
+                                to <lightning:formattedDateTime value="{! item.effectiveTo }"/>
+                            </aura:if>
+                            <aura:set attribute="else">
+                                <aura:if isTrue="{! item.isCurrentIndicator eq 'N' }">
+                                    (Not current)
+                                </aura:if>
+                            </aura:set>
+                        </aura:if>
+                    </aura:iteration>
+                </p>
+            </aura:if>
+            
+          	<aura:if isTrue="{! !empty(v.lookupEntry.ASICNumber) }">
+	            <p>ASIC registration:&nbsp;{! v.lookupEntry.ASICNumber }</p>
+            </aura:if>
+            
+          	<aura:if isTrue="{! !empty(v.lookupEntry.dgrEndorsement) }">
+	            <p>Deductible Gift Reciptient (DGR):&nbsp;Endorsed
+                    <aura:iteration items="{! v.lookupEntry.dgrEndorsement }"
+                                    var="item">
+                        from <lightning:formattedDateTime value="{! item.endorsedFrom }"/>
+                        <aura:if isTrue="{! !empty(item.endorsedTo) &amp;&amp; item.endorsedTo ne '0000-12-30' }">
+                            to <lightning:formattedDateTime value="{! item.endorsedTo }"/>
+                        </aura:if>
+                    </aura:iteration>
+                </p>
+            </aura:if>
+            
+          	<aura:if isTrue="{! !empty(v.lookupEntry.recordLastUpdatedDate) }">
+                <p>Last update on <lightning:formattedDateTime value="{! v.lookupEntry.recordLastUpdatedDate }"/></p>
+            </aura:if>
+        </div>
+    </lightning:card>
+</aura:component>

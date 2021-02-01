@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:attribute name="ABN" type="String" access="public" />
+    <aura:attribute name="FormattedABN" type="String" access="public" />
+    
+    <aura:handler name="change" value="{! v.ABN }" action="{! c.ABNChange }" />
+    <aura:handler name="init" value="{! this }" action="{! c.ABNChange }" />
+    
+    {! v.FormattedABN }
+</aura:component>

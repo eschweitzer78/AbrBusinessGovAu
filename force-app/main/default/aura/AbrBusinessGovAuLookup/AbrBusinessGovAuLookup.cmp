@@ -1,0 +1,55 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable"
+                controller="AbrBusinessGovAuCallout">
+    <aura:attribute name="lookupType" type="String" access="public" default="ABN"/>
+    <aura:attribute name="lookupABN" type="String" access="private"/>
+    <aura:attribute name="lookupName" type="String" access="private"/>
+    <aura:attribute name="lookupResult" type="Object" access="private"/>
+    <aura:attribute name="lookupError" type="String" access="private"/>
+    <aura:attribute name="isLoading" type="Boolean" access="private" default="false"/>
+
+	<aura:if isTrue="{! v.isLoading }">    
+        <lightning:spinner alternativeText="Loading..."/>
+    </aura:if>
+    
+	<lightning:card title="Australian Business Register (ABR) Lookup">
+        <aura:set attribute="actions">
+            <lightning:button label="Lookup" onclick="{! c.performLookup }"/>
+        </aura:set>           
+            
+        <lightning:accordion activeSectionName="{! v.lookupType }">
+            <lightning:accordionSection name="ABN" label="ABN">
+                <h2 class="header">Lookup by ABN</h2>
+                <lightning:input type="text" name="ABN" label="Australian Business Number" placeholder="11 digit ABN" value="{! v.lookupABN }"/>
+            </lightning:accordionSection>
+            <lightning:accordionSection name="Name" label="Name">
+                <h2 class="header">Lookup by Name</h2>
+                <lightning:input type="text" name="Name" label="Name" placeholder="Business Name" value="{! v.lookupName }" />
+            </lightning:accordionSection>
+        </lightning:accordion>
+    </lightning:card>     
+            
+    <aura:if isTrue="{! !empty(v.lookupResult.businessEntity) }" >
+        <c:AbrBusinessGovAuLookupEntry lookupEntry="{! v.lookupResult.businessEntity }" />
+    </aura:if>
+    
+    <aura:if isTrue="{! !empty(v.lookupResult.searchResultsList) }" >
+        <aura:iteration items="{! v.lookupResult.searchResultsList.searchResultsRecord }" var="item">
+            <c:AbrBusinessGovAuLookupEntry lookupEntry="{! item }" />
+        </aura:iteration>
+    </aura:if>
+
+    <aura:if isTrue="{! and(empty(v.lookupResult.businessEntity), empty(v.lookupResult.searchResultsList)) }" >
+        <lightning:card>
+            <p class="slds-m-horizontal_small slds-m-bottom_large">No result found.</p>
+            <aura:set attribute="footer">
+                <aura:if isTrue="{! !empty(v.lookupResult.exception_x) }">
+                    <p>{! v.lookupResult.exception_x.exceptionDescription }</p>
+                </aura:if>
+                <aura:if isTrue="{! !empty(v.lookupError) }">
+                    <p>{! v.lookupError }</p>
+                </aura:if>
+            </aura:set>
+        </lightning:card>
+    </aura:if>
+    
+</aura:component>
